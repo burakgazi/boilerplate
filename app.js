@@ -190,12 +190,12 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 app.get('/product', passportConfig.isAuthenticated, productController.List);
 app
   .route('/product/create')
-  .all(passportConfig.isAuthenticated)
+  .all(passportConfig.isAdmin)
   .get(productController.GetCreate)
   .post(productController.PostCreate);
-app.post('/product/update', productController.Update);
-app.post('/product/delete', productController.Delete);
-app.get('/product/edit/:productName', passportConfig.isAuthenticated, productController.GetUpdate);
+app.post('/product/update', passportConfig.isAdmin, productController.Update);
+app.post('/product/delete', passportConfig.isAdmin, productController.Delete);
+app.get('/product/edit/:productName', passportConfig.isAdmin, productController.GetUpdate);
 app.get('/product/:slug', productController.GetBySlug);
 
 /**
@@ -209,11 +209,32 @@ app.post(
   lusca({ csrf: true }),
   apiController.postFileUpload
 );
-// app.get('/api/google/sheets', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getGoogleSheets);
-// app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets.readonly'], accessType: 'offline', prompt: 'consent' }));
-// app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-//   res.redirect(req.session.returnTo || '/');
-// });
+app.get(
+  '/api/google/sheets',
+  passportConfig.isAuthenticated,
+  passportConfig.isAuthorized,
+  apiController.getGoogleSheets
+);
+app.get(
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: [
+      'profile',
+      'email',
+      'https://www.googleapis.com/auth/drive',
+      'https://www.googleapis.com/auth/spreadsheets.readonly',
+    ],
+    accessType: 'offline',
+    prompt: 'consent',
+  })
+);
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    res.redirect(req.session.returnTo || '/');
+  }
+);
 
 /**
  * Error Handler.
