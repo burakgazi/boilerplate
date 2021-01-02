@@ -1,0 +1,59 @@
+{
+    "html": {
+        "navbar": {
+            "home": "Ana Sayfa",
+            "api": "Api Ornekleri",
+            "contact": "Iletisim",
+            "status": "Durum",
+            "myAccount": "Hesabim",
+            "logout": "Cikis",
+            "login": "Giris",
+            "createAccount": "Hesap Olustur"
+        },
+        "home": {
+            "header": "GAZI.CO",
+            "subHeader": "Welcome to gazi.co boilerplate, build on hacklaton boilerplate",
+            "goToDetails": "View Details >>",
+            "noContentHeader": "WELCOME",
+            "noContentDescription": "Currently there are no new things to show. Please check back again soon"
+        },
+        "contact": {
+            "header": "Contact Form",
+            "name": "Name",
+            "email": "Email",
+            "textAreaLabel": "What you want to tell us?",
+            "send": "Send"
+        },
+        "product": {
+            "createHeader": "Yeni Yarat",
+            "listHeader": "Product listesi",
+            "listSubHeader": "Urun listesi",
+            "listButton": "Detay >>"
+        },
+        "footer": {
+            "copyright": "Tum haklari saklidir."
+        }
+    },
+    "product": "Urun",
+    "productParams": {
+        "name": "Name",
+        "description": "desciption",
+        "createdBy": "Yaratan",
+        "createdAt": "Yaratilis Tarihi"
+    },
+    "date": "Tarih",
+    "comment": "Aciklama",
+    "user": "Kullanici",
+    "new": "Yeni",
+    "delete": "Sil",
+    "undelete":"Geri Al",
+    "create": "Yarat",
+    "backend": {
+        "product": {
+            "createSuccessMessage": "{{name}} musterisi acilmistir!",
+            "updateTrans": "Musteri Ismi guncellenmistir",
+            "delete": "Musteri silinmistir",
+            "noTransaction": "Islem bulma hatasi!"
+        }
+    }
+}

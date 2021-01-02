@@ -1,0 +1,162 @@
+<div class="pb-2 mt-2 mb-4 border-bottom">
+  <h3>Profile Information</h3>
+</div>
+<form action="/account/profile" method="POST">
+  <input type="hidden" name="_csrf" value="{{_csrf}}">
+  <div class="form-group row">
+    <label for="email" class="col-md-3 col-form-label font-weight-bold text-right">Email</label>
+    <div class="col-md-7">
+      <input type="email" name="email" id="email" value="{{user.email}}" autocomplete="email" required
+        class="form-control"></div>
+    <div class="offset-sm-3 col-md-7 pl-3">
+      {{#if user.emailVerified}}
+      <div class="text-success font-italic">Verified</div>
+      {{else}}
+      <div class="text-danger font-italic">Unverified: &nbsp;<a href="/account/verify">Send verification email</a></div>
+      {{/if}}</div>
+  </div>
+  <div class="form-group row">
+    <label for="name" class="col-md-3 col-form-label font-weight-bold text-right">Name</label>
+    <div class="col-md-7">
+      <input type="text" name="name" id="name" value="{{user.profile.name}}" autocomplete="name" class="form-control">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label font-weight-bold text-right">Gender</label>
+    <div class="col-sm-6">
+      <div class="form-check form-check-inline">
+        <input type="radio" checked="{{#eq user.profile.gender 'male'}}checked{{/eq}}" name="gender" value="male"
+          data-toggle="radio" class="form-check-input">
+        <label class="form-check-label">Male</label></div>
+      <div class="form-check form-check-inline">
+        <input type="radio" checked="{{#eq user.profile.gender 'female'}}checked{{/eq}}" name="gender" value="female"
+          data-toggle="radio" class="form-check-input">
+        <label class="form-check-label">Female</label></div>
+      <div class="form-check form-check-inline">
+        <input type="radio" checked="{{#eq user.profile.gender 'other'}}checked{{/eq}}" name="gender" value="other"
+          data-toggle="radio" class="form-check-input">
+        <label class="form-check-label">Other</label></div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="location" class="col-md-3 col-form-label font-weight-bold text-right">Location</label>
+    <div class="col-md-7">
+      <input type="text" name="location" id="location" value="{{user.profile.location}}" autocomplete
+        class="form-control"></div>
+  </div>
+  <div class="form-group row">
+    <label for="website" class="col-md-3 col-form-label font-weight-bold text-right">Website</label>
+    <div class="col-md-7">
+      <input type="text" name="website" id="website" value="{{user.profile.website}}" autocomplete="url"
+        class="form-control"></div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label font-weight-bold text-right">Gravatar</label>
+    <div class="col-sm-4">
+      <img src="" width="100" height="100" class="profile"></div>
+  </div>
+  <div class="form-group">
+    <div class="offset-sm-3 col-md-7 pl-2">
+      <button type="submit" class="btn btn btn-primary"><i class="fas fa-pencil-alt fa-sm"></i>Update Profile</button>
+    </div>
+  </div>
+</form>
+<div class="pb-2 mt-2 mb-4 border-bottom">
+  <h3>Change Password</h3>
+</div>
+<form action="/account/password" method="POST">
+  <input type="hidden" name="_csrf" value="{{_csrf}}">
+  <div class="form-group row">
+    <label for="password" class="col-md-3 col-form-label font-weight-bold text-right">New
+      Password</label>
+    <div class="col-md-7">
+      <input type="password" name="password" id="password" autocomplete="new-password" minlength="8" required
+        class="form-control"></div>
+  </div>
+  <div class="form-group row">
+    <label for="confirmPassword" class="col-md-3 col-form-label font-weight-bold text-right">Confirm Password</label>
+    <div class="col-md-7">
+      <input type="password" name="confirmPassword" id="confirmPassword" autocomplete="new-password" minlength="8"
+        required class="form-control"></div>
+  </div>
+  <div class="form-group">
+    <div class="offset-sm-3 col-md-7 pl-2">
+      <button type="submit" class="btn btn-primary"><i class="fas fa-lock fa-sm"></i>Change Password</button></div>
+  </div>
+</form>
+<div class="pb-2 mt-2 mb-4 border-bottom">
+  <h3>Delete Account</h3>
+</div>
+<form action="/account/delete" method="POST"
+  onsubmit="return confirm('Are you sure you want to delete your account?');">
+  <div class="form-group">
+    <p class="offset-sm-3 col-md-7 pl-2">You can delete your account, but keep in mind this action is irreversible.</p>
+    <input type="hidden" name="_csrf" value="{{_csrf}}">
+    <div class="offset-sm-3 col-md-7 pl-2">
+      <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt fa-sm"></i>Delete my account</button>
+    </div>
+  </div>
+</form>
+<div class="pb-2 mt-2 mb-4 border-bottom">
+  <h3>Linked Accounts</h3>
+</div>
+<div class="form-group">
+  <div class="offset-sm-3 col-md-7 pl-2">
+    {{#if user.instagram}}
+    <p class="mb-1"><a href="/account/unlink/instagram" class="text-danger">Unlink your Instagram account</a></p>
+    {{else}}
+    <p class="mb-1"><a href="/auth/instagram">Link your Instagram account</a></p>
+    {{/if}}</div>
+  <div class="offset-sm-3 col-md-7 pl-2">
+    {{#if user.google}}
+    <p class="mb-1"><a href="/account/unlink/google" class="text-danger">Unlink your Google account</a></p>
+    {{else}}
+    <p class="mb-1"><a href="/auth/google">Link your Google account</a></p>
+    {{/if}}</div>
+  <div class="offset-sm-3 col-md-7 pl-2">
+    {{#if user.facebook}}
+    <p class="mb-1"><a href="/account/unlink/facebook" class="text-danger">Unlink your Facebook account</a></p>
+    {{else}}
+    <p class="mb-1"><a href="/auth/facebook">Link your Facebook account</a></p>
+    {{/if}}{{#if user.snapchat}}
+    <p class="mb-1"><a href="/account/unlink/snapchat" class="text-danger">Unlink your Snapchat account</a></p>
+    {{else}}
+    <p class="mb-1"><a href="/auth/snapchat">Link your Snapchat account</a></p>
+    {{/if}}</div>
+  <div class="offset-sm-3 col-md-7 pl-2">
+    {{#if user.twitter}}
+    <p class="mb-1"><a href="/account/unlink/twitter" class="text-danger">Unlink your Twitter account</a></p>
+    {{else}}
+    <p class="mb-1"><a href="/auth/twitter">Link your Twitter account</a></p>
+    {{/if}}</div>
+  <div class="offset-sm-3 col-md-7 pl-2">
+    {{#if user.github}}
+    <p class="mb-1"><a href="/account/unlink/github" class="text-danger">Unlink your GitHub account</a></p>
+    {{else}}
+    <p class="mb-1"><a href="/auth/github">Link your GitHub account</a></p>
+    {{/if}}</div>
+  <div class="offset-sm-3 col-md-7 pl-2">
+    {{#if user.linkedin}}
+    <p class="mb-1"><a href="/account/unlink/linkedin" class="text-danger">Unlink your LinkedIn account</a></p>
+    {{else}}
+    <p class="mb-1"><a href="/auth/linkedin">Link your LinkedIn account</a></p>
+    {{/if}}</div>
+  <div class="offset-sm-3 col-md-7 pl-2">
+    {{#if user.steam}}
+    <p class="mb-1"><a href="/account/unlink/steam" class="text-danger">Unlink your Steam account</a></p>
+    {{else}}
+    <p class="mb-1"><a href="/auth/steam">Link your Steam account</a></p>
+    {{/if}}</div>
+  <div class="offset-sm-3 col-md-7 pl-2">
+    {{#if user.twitch}}
+    <p class="mb-1"><a href="/account/unlink/twitch" class="text-danger">Unlink your Twitch account</a></p>
+    {{else}}
+    <p class="mb-1"><a href="/auth/twitch">Link your Twitch account</a></p>
+    {{/if}}</div>
+  <div class="offset-sm-3 col-md-7 pl-2">
+    {{#if user.quickbooks}}
+    <p class="mb-1"><a href="/account/unlink/quickbooks" class="text-danger">Unlink your QuickBooks account</a></p>
+    {{else}}
+    <p class="mb-1"><a href="/auth/quickbooks">Link your QuickBooks account</a></p>
+    {{/if}}</div>
+</div>

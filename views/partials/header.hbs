@@ -1,0 +1,56 @@
+<div class="navbar navbar-light fixed-top navbar-expand-lg bg-light">
+  <div class="container">
+    <a href="/" class="navbar-brand">
+      <i class="fas fa-cube"></i>gazi account
+    </a>
+    <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggler">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="nav-item {{#eq title 'Home'}}'active'{{/eq}}">
+          <a href="/" class="nav-link">{{{__ "html.navbar.home"}}}</a>
+        </li>
+        <li class="nav-item {{#eq title 'Contact'}}'active'{{/eq}}">
+          <a href="/contact" class="nav-link">{{{__ "html.navbar.contact"}}}</a>
+        </li>
+        <li class="nav-item {{#eq title 'Status'}}'active'{{/eq}}">
+          <a href="/status" class="nav-link">{{{__ "html.navbar.status"}}}</a>
+        </li>
+        {{#if user}}
+        <li class="nav-item {{#eq title 'Product'}}'active'{{/eq}}">
+          <a href="/product" class="nav-link">{{{__ "product"}}}</a>
+        </li>
+        {{/if}}
+      </ul>
+      <ul class="nav navbar-nav ml-auto">
+        {{#if user}}
+        <li class="dropdown {{#eq title 'Account Management'}}'active'{{/eq}} nav-item">
+          <a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link">
+            {{#if user.profile.picture}}
+            <img src="{{user.profile.picture}}">
+            {{else}}
+            <img src="{{user.gravatar}}">
+            {{/if}}
+            <span>{{user.email}}</span>
+            <i class="caret"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="/account" class="dropdown-item">{{{__ "html.navbar.myAccount"}}}</a>
+            <div class="dropdown-divider"></div>
+            <a href="/logout" class="dropdown-item">{{{__ "html.navbar.logout"}}}</a>
+          </div>
+        </li>
+        {{else}}
+        <li class="nav-item {{#eq title 'Login'}}'active'{{/eq}}">
+          <a href="/login" class="nav-link">{{{__ "html.navbar.login"}}}</a>
+        </li>
+        <li class="nav-item {{#eq title 'Create Account'}}'active'{{/eq}}">
+          <a href="/signup" class="nav-link">{{{__ "html.navbar.createAccount"}}}</a>
+        </li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</div>

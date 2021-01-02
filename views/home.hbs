@@ -1,0 +1,19 @@
+<h1>{{__ "html.home.header"}}</h1>
+<p class="lead">{{__ "html.home.subHeader"}}</p>
+<hr>
+<div class="row">
+  {{#if list}}
+  {{#each list}}
+  <div class="col-md-6">
+    <h2>{{name}}</h2>
+    <p>{{description}}</p>
+    <p><a href="{{url}}" role="button" class="btn btn-raised">{{__ "html.home.goToDetails"}}</a></p>
+  </div>
+  {{/each}}
+  {{else}}
+  <div class="col-md-6">
+    <h2>{{__ "html.home.noContentHeader"}}</h2>
+    <p>{{__ "html.home.noContentDescription"}}</p>
+  </div>
+  {{/if}}
+</div>

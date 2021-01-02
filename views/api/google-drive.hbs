@@ -1,0 +1,13 @@
+<div class="pb-2 mt-2 mb-4 border-bottom">
+  <h2><i class="fab fa-google fa-sm"></i>Google Drive API</h2>
+</div>
+<div role="group" class="btn-group d-flex"><a href="https://developers.google.com/drive/api/v3/quickstart/nodejs"
+    target="_blank" class="btn btn-primary w-100"><i class="far fa-check-square fa-sm"></i>Getting Started</a><a
+    href="https://console.developers.google.com/apis/dashboard" target="_blank" class="btn btn-primary w-100"><i
+      class="fas fa-laptop fa-sm"></i>API Console</a></div><br>
+<div class="pb-2 mt-2 mb-4 border-bottom">
+  <h4>The list of files at the root of your Google Drive</h4>
+  {{#each files as |file|}}
+  <li><img src="{{file.iconLink}}"> <a href="{{file.webViewLink}}" target="_blank">{{file.name}}</a></li>
+  {{/each}}
+</div>

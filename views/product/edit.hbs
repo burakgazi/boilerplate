@@ -1,0 +1,75 @@
+<div class="pb-2 mt-2 mb-4 border-bottom">
+  <h3>Product Page</h3>
+
+</div>
+<div class="container-fluid">
+  <div id="productForms">
+    <form action="/product/delete" method="POST">
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label text-right"></label>
+        <div class="col-md-7">
+          {{#if product.isDeleted}}
+          <button type="submit" class="btn btn btn-success">
+            <i class="fas fa-history-alt fa-sm"></i>
+            {{{__ "undelete"}}}
+          </button>
+          {{else}}
+          <button type="submit" class="btn btn btn-danger">
+            <i class="fas fa-trash-alt fa-sm"></i>
+            {{{__ "delete"}}}
+          </button>
+          {{/if}}
+        </div>
+      </div>
+      <input type="hidden" name="_csrf" value="{{_csrf}}">
+      <input type="hidden" name="id" value="{{product._id}}">
+      <input type="hidden" name="isDeleted" value="{{product.isDeleted}}">
+    </form>
+    <form action="/product/update" method="POST">
+      <input type="hidden" name="_csrf" value="{{_csrf}}">
+      <input type="hidden" name="id" value="{{product._id}}">
+      <div class="form-group row">
+        <label for="name" class="col-md-3 col-form-label font-weight-bold text-right">{{{__
+          "productParams.name"}}}</label>
+        <div class="col-md-7">
+          <input type="text" value="{{product.name}}" name="name" id="name" class="form-control">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="name" class="col-md-3 col-form-label font-weight-bold text-right">{{{__
+          "productParams.description"}}}</label>
+        <div class="col-md-7">
+          <textarea type="text" name="description" id="description"
+            class="form-control">{{product.description}}</textarea>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="createdBy" class="col-md-3 col-form-label font-weight-bold text-right">{{{__
+          "productParams.createdBy"}}}</label>
+        <div class="col-md-7">
+          <span class="form-control">{{product.createdBy.email}}</span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="createdAt" class="col-md-3 col-form-label font-weight-bold text-right">{{{__
+          "productParams.createdAt"}}}</label>
+        <div class="col-md-7">
+          <span class="form-control">{{dateText product.createdAt}}</span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="createdAt" class="col-md-3 col-form-label font-weight-bold text-right"></label>
+        <div class="col-md-7">
+          <button type="submit" class="btn btn btn-success">
+            <i class="fas fa-trash-alt fa-sm"></i>
+            {{{__ "create"}}}
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

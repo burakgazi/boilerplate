@@ -1,0 +1,13 @@
+<h1>{{{__ "html.product.listHeader"}}}</h1>
+<p class="lead">{{{__ "html.product.listSubHeader"}}}</p>
+<a class="btn btn-sm btn-primary" href="/product/create">{{{__ "new"}}}</a>
+<hr>
+<div class="row">
+  {{#each list}}
+  <div class="col-md-12 border-bottom "  style="{{#if isDeleted}}text-decoration: line-through;{{/if}}">
+    <a href="{{url}}" role="button" class="display-4 text-dark">
+      {{name}}
+    </a>
+  </div>
+  {{/each}}
+</div>

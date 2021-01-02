@@ -1,0 +1,56 @@
+<div class="pb-2 mt-2 mb-4 border-bottom">
+  <h2><i class="fab fa-foursquare fa-sm"></i>Foursquare API</h2>
+</div>
+<div role="group" class="btn-group d-flex"><a href="https://developer.foursquare.com/start" target="_blank"
+    class="btn btn-primary w-100"><i class="far fa-check-square fa-sm"></i>Getting Started</a><a
+    href="https://developer.foursquare.com/docs/explore" target="_blank" class="btn btn-primary w-100"><i
+      class="fas fa-laptop fa-sm"></i>API Console</a><a href="https://developer.foursquare.com/docs/" target="_blank"
+    class="btn btn-primary w-100"><i class="fas fa-code-branch fa-sm"> </i>API Endpoints</a></div>
+<h3 class="text-primary">Trending Venues</h3>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="d-xs d-sm">Category</th>
+      <th class="d-xs">Checkins</th>
+      <th>Here Now</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each trendingVenues.venues as |venue|}}
+    <tr>
+      <td>{{venue.name}}</td>
+      <td class="d-xs d-sm">{{venue.categories[0].name}}</td>
+      <td class="d-xs">{{venue.stats.checkinsCount}}</td>
+      <td>{{venue.hereNow.count}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table><br>
+<h3 class="text-primary">Venue Detail</h3>
+<p><img
+    src="{{venueDetail.venue.photos.groups[0].items[0].prefix}}150x150{{venueDetail.venue.photos.groups[0].items[0].suffix}}">
+</p>
+<div class="badge badge-primary">{{venueDetail.venue.name}} ({{venueDetail.venue.categories[0].shortName}})</div>
+<div class="badge badge-success">{{venueDetail.venue.location.address}}, {{venueDetail.venue.location.city}},
+  {{venueDetail.venue.location.state}}</div>
+<div class="badge badge-warning">{{venueDetail.venue.likes.count}} likes, {{venueDetail.venue.rating}} rating</div>
+<h3 class="text-primary">User Checkins</h3>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Category</th>
+      <th>Checkins</th>
+    </tr>
+  </thead>
+  <tbody>{{#each userCheckins.checkins.items as |checkin|}}
+    <tr>
+      <td>{{checkin.venue.name}}</td>
+      <td>{{checkin.venue.location.address}}, {{checkin.venue.location.city}}, {{checkin.venue.location.state}}</td>
+      <td>{{checkin.venue.categories[0].shortName}}</td>
+      <td>{{checkin.venue.stats.checkinsCount}}</td>
+    </tr>
+    {{/each}}</tbody>
+</table>

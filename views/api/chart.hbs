@@ -1,0 +1,51 @@
+<div class="pb-2 mt-2 mb-4 border-bottom">
+  <h2><i style="color: #FF6384" class="fas fa-chart-bar fa-sm fa-sm"></i>Chart.js and Alpha Vantage</h2>
+</div>
+<div role="group" class="btn-group d-flex"><a href="https://www.chartjs.org/docs" target="_blank"
+    class="btn btn-primary w-100"><i class="fas fa-chart-bar fa-sm"></i>Chart.js Docs</a><a
+    href="https://www.alphavantage.co/documentation" target="_blank" class="btn btn-primary w-100"><i
+      class="fas fa-money-check-alt fa-sm"></i>Alpha Vantage Docs</a></div>
+<div class="container">
+  <div class="mt-2 mb-4">
+    <h3>Chart.js — Line Chart Demo using data from Alpha Vantage</h3>
+  </div>Alpha Vantage APIs are grouped into four categories: (1) Stock Time Series Data, (2) Physical and Digital/Crypto
+  Currencies (e.g., Bitcoin), (3) Technical Indicators, and (4) Sector Performances. All APIs are realtime: the latest
+  data points are derived from the current trading day.
+  ChartJS can render various chart types with different formatting.
+  This example plots the closing stock price of Microsoft for the last 100 days.<div class="mt-2 mb-4">
+    <div style="width:90%; height:80%; margin: 0 auto;"><canvas id="chart"></canvas></div>
+  </div>
+</div>
+<script>
+    < !--TODO: Fix unsupported jade inline javascript
+  -->
+    var
+    datesList
+      =
+      !{
+        dates
+      };
+< !--TODO: Fix unsupported jade inline javascript-- >
+var closingList = !{ closing };
+  var ctx = document.getElementById('chart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: datesList,
+      datasets: [{
+        label: "Microsoft's Closing Stock Values",
+        data: closingList,
+        borderColor: "#3e95cd",
+        backgroundColor: "rgba(118,152,255,0.4)"
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+    },
+  });
+</script>
+
+{{#section 'script'}}
+<script src="/js/lib/Chart.min.js"></script>
+{{/section}}
